@@ -8,7 +8,7 @@ mmh3 2.3.1 for OXS 10.7+ supports both Python 2.7 and 3.x.
 This package allows Sentry servers to be installed on Mac OSX version 10.7 and above `using Pip <https://docs.sentry.io/server/installation/python/>`_.
 
 
-Installing Sentry:
+Installing the Sentry Server Package:
 -----
 Using Pip::
 
