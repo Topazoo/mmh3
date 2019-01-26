@@ -2,10 +2,24 @@
 # mmh3 Python module was written by Hajime Senuma, and is also placed in the public domain.
 # The authors hereby disclaim copyright to these source codes.
 
-from distutils.core import setup, Extension
+# Edited based on https://github.com/honnibal/mmh3 to allow Sentry installation on OSX 10.7+
+
+from sys import platform as _platform
+from setuptools import setup, Extension
+
+COMPILE_OPTIONS = []
+LINK_OPTIONS = []
+
+if _platform == "darwin":
+    COMPILE_OPTIONS.append("-stdlib=libc++")
+    COMPILE_OPTIONS.append("-mmacosx-version-min=10.7")
+    LINK_OPTIONS.append("-lc++")
+    LINK_OPTIONS.append("-nodefaultlibs")
 
 mmh3module = Extension('mmh3',
-    sources = ['mmh3module.cpp', 'MurmurHash3.cpp'])
+                       sources = ['mmh3module.cpp', 'MurmurHash3.cpp'],
+                       extra_compile_args=COMPILE_OPTIONS,
+                       extra_link_args=LINK_OPTIONS)
 
 setup(name = 'mmh3',
     version = '2.3.1',
